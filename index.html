@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Flux</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--titulo e subtitulo do site-->
+    <header>
+        <h1>Bem vindo ao Controle Flux</h1>
+        <p>Registre seus gastos e saiba exatamente para onde seu dinheiro está indo. Chega de perder o controle — veja suas despesas de forma clara e organizada em um só lugar.</p>
+    </header>
+
+    <!--aqui sera o formulario de gastos e a categoria dos gastos-->
+    <form>
+        <label for="descricao">Aonde gastou</label>
+        <input type="text" id="descricao" placeholder="Descrição (ex: Almoço)" required>
+        
+        <label for="valor">Quantia que gastou</label>
+        <input type="number" id="valor" placeholder="0,00" min="0" step="0.01" required>
+        
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+            <option value="Alimentação">Alimentação</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Estudos">Estudos</option>
+            <option value="Viagem">Viagem</option>
+            <option value="Outros">Outros</option>
+        </select>
+
+        <!--botao para adicionar gastos-->
+        <button type="button" id ="adicionarGasto">Adicionar Gasto</button>
+    </form>
+
+    <!-- os gastos apareceram aqui quando o usuario adicionar seus gastos-->
+    <ul id="listaGastos"></ul>
+
+<canvas id="grafico"></canvas>
+    <!--sera o total somado dos gastos-->
+    <div id="resumo">
+        <p>Total de gastos: <span id="valorTotal">R$ 0,00</span></p>
+    </div>
+    <footer>
+        <p>Controle Flux © 2026</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
