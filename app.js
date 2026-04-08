@@ -8,12 +8,14 @@ btn.addEventListener("click", function() {
         window.alert("O campo esta vazio!")
         return 0;
     }
+    //variaveis em descricao, valor e categoria usando id
     const descricao = document.getElementById("descricao").value
     const valor = parseFloat(document.getElementById("valor").value)
     total = valor + total
+    const categoria = document.getElementById('categoria').value
     
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
-    gastos.push({valor, descricao})
+    gastos.push({valor, descricao, categoria})
 
     //esta adicionando o total no valorTotal
     document.getElementById("valorTotal").textContent = total.toFixed(2)
@@ -22,11 +24,9 @@ btn.addEventListener("click", function() {
     const listaGastosTotal = document.createElement("li") 
     
     //pegando a variavel e juntando as variaveis do html na variavel do js
-    listaGastosTotal.textContent = `${descricao} ${categoria} + - R$ + ${valor.toFixed(2)}`
+    listaGastosTotal.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
 
     //juntando o pai e o filho na lista de gasto 
     document.getElementById("listaGastos").appendChild(listaGastosTotal)
-
-    const categria = document.getElementById('categoria').value
 } )
 
