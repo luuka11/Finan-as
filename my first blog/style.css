@@ -1,0 +1,91 @@
+* {
+    background-color: black;   
+    color: #b56cff;
+}
+.cabecalho {
+    text-align: center;
+    padding-top: 40px;
+}
+.nav-lista {
+    display: flex;            /* Coloca os filhos lado a lado */
+    align-items: center;      /* Centraliza verticalmente */
+    justify-content: center;  /* Centraliza horizontalmente */
+    gap: 60px;                /* ⬅️ ESPAÇAMENTO entre texto e imagem */
+    max-width: 1200px;        /* Limita a largura pra não ficar esticado */
+    margin: 0 auto;           /* Centraliza o container na página */
+    padding: 40px 20px;
+    list-style: none;
+}
+nav a {
+    text-decoration: none;
+    
+}
+
+.conteiner {
+    text-align: center;
+    padding: 40px;
+}
+.titulo {
+    font-size: 50px;
+    text-align: center;
+}
+.subtitulo{
+    text-align: center;
+}
+.conteudo_flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.texto_bloco{
+    flex: 1;
+    max-width: 550px;
+    align-items: left;
+}
+.texto{
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: left;
+    max-width: 550px;
+    color: white;
+    gap: 60px;
+
+}
+.texto_about{
+    display: flex;
+    font-size: 20px;
+    gap: 60px;
+    text-align: center;
+    color: white;
+
+}
+.imagem {
+    border-radius: 10px;
+    width: 250px;
+
+}
+.contatos {
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px auto;
+}
+.contatos li {
+    list-style: none;
+    color: white;
+    font-size: 20px;
+}
+.footer {
+    text-align: center;
+    padding: 20rem;
+}
+.conteiner-about {
+    font-size: 16px;
+    max-width: 600px;
+    line-height: 1.5;
+    margin: 0 auto;
+
+}

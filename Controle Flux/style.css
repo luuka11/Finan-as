@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+    background-color: #061013;
+    color: #ffff;
+    font-family: outfit;
+}
+h1 {
+    text-align: center;
+    padding: 40px;
+    max-width: 1000px;
+    font-size: 40px;
+    color: #9acc77; 
+}
+p {
+    text-align: center;
+    font-size: 18px;
+    font-size: 20px;
+}
+label {
+    font-size: 25px;
+    color: #9acc77;
+}
+form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    margin: 0 auto;
+}
+input{
+    border-radius: 5px;
+    background-color: #0b110d;
+    color: white;
+}
+input::placeholder {
+    font-family: outfit;
+}
+select {
+    background-color: #061013;
+    color: #f7f7f7;
+    border-radius: 5px;
+}
+span {
+    font-size: 20px;
+    color: #9acc77;
+}
+
+footer {
+    max-width: 1000px;
+    color: #9acc77;
+}
