@@ -1,5 +1,6 @@
 let gastos = []; //chaves sem nada porque o usuario ainda ira adicionar
 let total = 0; //comeca em zero
+let graficoInstancia = null
 
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
@@ -16,9 +17,10 @@ btn.addEventListener("click", function() {
     document.getElementById('valor').value = ''
     
     total = valor + total
-    
+
+    document.getElementById('categoria').selectedIndex = 0
+
     const categoria = document.getElementById('categoria').value
-    document.getElementById('categoria').value =''
 
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
     gastos.push({valor, descricao, categoria})
@@ -34,5 +36,39 @@ btn.addEventListener("click", function() {
 
     //juntando o pai e o filho na lista de gasto 
     document.getElementById("listaGastos").appendChild(listaGastosTotal)
-} )
+
+    atualizarGrafico()
+    
+})
+function atualizarGrafico() {
+    const labels = []
+    const valores = []
+
+    for (const gasto of gastos) {
+        const posicao = labels.indexOf(gasto.categoria)
+
+        if (posicao === -1) {
+            labels.push(gasto.categoria)
+            valores.push(gasto.valor)
+        } else {
+            valores[posicao] = valores[posicao] + gasto.valor
+        }
+    }
+
+    const graficoReal = document.getElementById('grafico')
+
+    if (graficoInstancia) {
+        graficoInstancia.destroy()
+    }
+
+    graficoInstancia = new Chart(graficoReal, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: valores
+            }]
+        }
+    })
+}
 
