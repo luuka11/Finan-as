@@ -42,6 +42,12 @@ select {
     color: #f7f7f7;
     border-radius: 5px;
 }
+#graficoContainer {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+} 
+
 span {
     font-size: 20px;
     color: #9acc77;
