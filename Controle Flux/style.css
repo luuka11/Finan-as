@@ -4,6 +4,9 @@ body {
     background-color: #061013;
     color: #ffff;
     font-family: outfit;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
 }
 h1 {
     text-align: center;
@@ -46,6 +49,7 @@ select {
     width: 300px;
     display: flex;
     justify-content: center;
+    
 } 
 
 span {
