@@ -25,14 +25,29 @@ btn.addEventListener("click", function() {
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
     gastos.push({valor, descricao, categoria})
 
+    const indice = gastos.length - 1
+
     //esta adicionando o total no valorTotal
     document.getElementById("valorTotal").textContent = total.toFixed(2)
 
     //adicionando a lista de total no site
     const listaGastosTotal = document.createElement("li") 
-    
+    const btnRemover = document.createElement("button")
+    btnRemover.textContent = "X"
+
     //pegando a variavel e juntando as variaveis do html na variavel do js
-    listaGastosTotal.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
+    listaGastosTotal.innerHTML = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
+
+    listaGastosTotal.appendChild(btnRemover)
+    
+    btnRemover.addEventListener("click", function(){
+        listaGastosTotal.remove()
+        gastos.splice(indice, 1)
+        
+        atualizarGrafico()
+    })
+    
+    
 
     //juntando o pai e o filho na lista de gasto 
     document.getElementById("listaGastos").appendChild(listaGastosTotal)
