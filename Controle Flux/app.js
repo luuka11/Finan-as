@@ -7,21 +7,22 @@ const dadosSalvos = localStorage.getItem("gastos") // salvando dados
     if (dadosSalvos) {
     gastos = JSON.parse(dadosSalvos)
 
-    for (const gasto of gastos){
-        const listaGastosTotal = document.createElement("li")
-        listaGastosTotal.innerHTML = `${gasto.categoria} - ${gasto.descricao} = R$ ${gasto.valor.toFixed(2)}`
-        const btnRemover = document.createElement("button")
-        btnRemover.addEventListener("click", function(){
+    
+for (let i = 0; i < gastos.length; i++) {
+    const gasto = gastos[i]
+    const listaGastosTotal = document.createElement("li")
+    listaGastosTotal.innerHTML = `${gasto.categoria} - ${gasto.descricao} = R$ ${gasto.valor.toFixed(2)}`
+    const btnRemover = document.createElement("button")
+    btnRemover.addEventListener("click", function(){
         listaGastosTotal.remove()
-        gastos.splice(indice, 1)
-    atualizarGrafico()
+        gastos.splice(i, 1)
+        localStorage.setItem("gastos", JSON.stringify(gastos)) 
+        atualizarGrafico()
     })
-        btnRemover.textContent = "X"
-        listaGastosTotal.appendChild(btnRemover)
-        document.getElementById("listaGastos").appendChild(listaGastosTotal)
-    }}
-
-
+    btnRemover.textContent = "X"
+    listaGastosTotal.appendChild(btnRemover)
+    document.getElementById("listaGastos").appendChild(listaGastosTotal)
+}}
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
 btn.addEventListener("click", function() {
@@ -69,7 +70,8 @@ btn.addEventListener("click", function() {
     btnRemover.addEventListener("click", function(){
         listaGastosTotal.remove()
         gastos.splice(indice, 1)
-        
+        localStorage.setItem("gastos", JSON.stringify(gastos)) 
+
     //atualiza o grafico sempre que for adicionar um gasto
         atualizarGrafico()
     })
@@ -112,7 +114,4 @@ function atualizarGrafico() {
                 data: valores
             }]
         }
-    })
-}
-
-
+    })}
