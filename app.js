@@ -1,23 +1,37 @@
 let gastos = []; //chaves sem nada porque o usuario ainda ira adicionar
 let total = 0; //comeca em zero
+if (localStorage.getItem("gastos")) {
+       gastos = JSON.parse(localStorage.getItem("gastos"));
+   }
+
+for (const gasto of gastos) {
+    const listaGastosTotal = document.createElement("li") 
+    listaGastosTotal.textContent = `${gasto.categoria} - ${gasto.descricao} = R$ ${gasto.valor.toFixed(2)}`
+    document.getElementById("listaGastos").appendChild(listaGastosTotal)
+    total = gasto.valor + total
+}
+//esta adicionando o total no valorTotal
+    document.getElementById("valorTotal").textContent = total.toFixed(2)
 
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
 btn.addEventListener("click", function() {
     if ((document.getElementById('descricao').value.trim() === "") ||(document.getElementById('valor').value.trim() === "")) {
         window.alert("O campo esta vazio!")
-        return 0;
+        return;
     }
     //variaveis em descricao, valor e categoria usando id
     const descricao = document.getElementById("descricao").value
-    const valor = parseFloat(document.getElementById("valor").value)
+    const valor = parseFloat(document.getElementById("valor").value.replaceAll(".","").replace(",",".") )
     total = valor + total
     const categoria = document.getElementById('categoria').value
     
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
     gastos.push({valor, descricao, categoria})
 
-    //esta adicionando o total no valorTotal
+    //pega o array e salvando ele como string no localStorage
+    localStorage.setItem("gastos", JSON.stringify(gastos))
+
     document.getElementById("valorTotal").textContent = total.toFixed(2)
 
     //adicionando a lista de total no site
