@@ -4,13 +4,20 @@ if (localStorage.getItem("gastos")) {
        gastos = JSON.parse(localStorage.getItem("gastos"));
    }
 
-for (const gasto of gastos) {
+function adicionarGastoNaLista(categoria, descricao, valor){
     const listaGastosTotal = document.createElement("li") 
-    listaGastosTotal.textContent = `${gasto.categoria} - ${gasto.descricao} = R$ ${gasto.valor.toFixed(2)}`
+    
+    listaGastosTotal.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
+    
     document.getElementById("listaGastos").appendChild(listaGastosTotal)
-    total = gasto.valor + total
+    
+    total = valor + total
 }
-//esta adicionando o total no valorTotal
+
+for (const gasto of gastos) {
+    adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
+}
+    //esta adicionando o total no valorTotal
     document.getElementById("valorTotal").textContent = total.toFixed(2)
 
 //ocorrer evento onde o botao funcionara quando for clicado
@@ -23,7 +30,7 @@ btn.addEventListener("click", function() {
     //variaveis em descricao, valor e categoria usando id
     const descricao = document.getElementById("descricao").value
     const valor = parseFloat(document.getElementById("valor").value.replaceAll(".","").replace(",",".") )
-    total = valor + total
+    
     const categoria = document.getElementById('categoria').value
     
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
@@ -32,15 +39,10 @@ btn.addEventListener("click", function() {
     //pega o array e salvando ele como string no localStorage
     localStorage.setItem("gastos", JSON.stringify(gastos))
 
+    adicionarGastoNaLista(categoria, descricao, valor)
+
     document.getElementById("valorTotal").textContent = total.toFixed(2)
-
-    //adicionando a lista de total no site
-    const listaGastosTotal = document.createElement("li") 
     
-    //pegando a variavel e juntando as variaveis do html na variavel do js
-    listaGastosTotal.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
-
-    //juntando o pai e o filho na lista de gasto 
-    document.getElementById("listaGastos").appendChild(listaGastosTotal)
+    
 } )
 
