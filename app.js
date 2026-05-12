@@ -4,20 +4,25 @@ if (localStorage.getItem("gastos")) {
        gastos = JSON.parse(localStorage.getItem("gastos"));
    }
 
+//cria uma funcao de adicionarGasto no site
 function adicionarGastoNaLista(categoria, descricao, valor){
-    const listaGastosTotal = document.createElement("li") 
+    //cria um item da lista
+    const itemGasto = document.createElement("li") 
     
-    listaGastosTotal.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
+    //escreve o texto nele
+    itemGasto.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
     
-    document.getElementById("listaGastos").appendChild(listaGastosTotal)
+    //junta o listaGastos com o filho itemGasto
+    document.getElementById("listaGastos").appendChild(itemGasto)
     
+    //atribuindo o total igual a valor + totalAnterior
     total = valor + total
 }
 
 for (const gasto of gastos) {
     adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
 }
-    //esta adicionando o total no valorTotal
+    //esta adicionando o total no depvalorTotal
     document.getElementById("valorTotal").textContent = total.toFixed(2)
 
 //ocorrer evento onde o botao funcionara quando for clicado
@@ -39,6 +44,7 @@ btn.addEventListener("click", function() {
     //pega o array e salvando ele como string no localStorage
     localStorage.setItem("gastos", JSON.stringify(gastos))
 
+    //chamando a funcao
     adicionarGastoNaLista(categoria, descricao, valor)
 
     document.getElementById("valorTotal").textContent = total.toFixed(2)
