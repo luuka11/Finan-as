@@ -1,5 +1,6 @@
 let gastos = []; //chaves sem nada porque o usuario ainda ira adicionar
 let total = 0; //comeca em zero
+
 if (localStorage.getItem("gastos")) {
        gastos = JSON.parse(localStorage.getItem("gastos"));
    }
@@ -14,11 +15,12 @@ function adicionarGastoNaLista(categoria, descricao, valor){
     
     //junta o listaGastos com o filho itemGasto
     document.getElementById("listaGastos").appendChild(itemGasto)
+
+    atualizarTotal(valor)
 }
 
 function atualizarTotal(valor){
-    
-    total + valor + total
+    total = valor + total
 }
 
 for (const gasto of gastos) {
@@ -37,6 +39,11 @@ btn.addEventListener("click", function() {
     //variaveis em descricao, valor e categoria usando id
     const descricao = document.getElementById("descricao").value
     const valor = parseFloat(document.getElementById("valor").value.replaceAll(".","").replace(",",".") )
+
+    if (isNaN(valor)){
+    window.alert("isto não é um número")
+    return;
+}
     
     const categoria = document.getElementById('categoria').value
     
