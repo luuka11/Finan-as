@@ -14,9 +14,11 @@ function adicionarGastoNaLista(categoria, descricao, valor){
     
     //junta o listaGastos com o filho itemGasto
     document.getElementById("listaGastos").appendChild(itemGasto)
+}
+
+function atualizarTotal(valor){
     
-    //atribuindo o total igual a valor + totalAnterior
-    total = valor + total
+    total + valor + total
 }
 
 for (const gasto of gastos) {
@@ -50,5 +52,4 @@ btn.addEventListener("click", function() {
     document.getElementById("valorTotal").textContent = total.toFixed(2)
     
     
-} )
-
+})
