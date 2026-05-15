@@ -11,7 +11,7 @@ function adicionarGastoNaLista(categoria, descricao, valor){
     const itemGasto = document.createElement("li") 
     
     //escreve o texto nele
-    itemGasto.textContent = `${categoria} - ${descricao} = R$ ${valor.toFixed(2)}`
+    itemGasto.textContent = `${categoria} - ${descricao} = ${valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`
     
     //junta o listaGastos com o filho itemGasto
     document.getElementById("listaGastos").appendChild(itemGasto)
@@ -27,7 +27,7 @@ for (const gasto of gastos) {
     adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
 }
     //esta adicionando o total no depvalorTotal
-    document.getElementById("valorTotal").textContent = total.toFixed(2)
+    document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
 
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
@@ -41,7 +41,7 @@ btn.addEventListener("click", function() {
     const valor = parseFloat(document.getElementById("valor").value.replaceAll(".","").replace(",",".") )
 
     if (isNaN(valor)){
-    window.alert("isto não é um número")
+    window.alert("O valor que você acaba de digitar não é um número")
     return;
 }
     
@@ -56,7 +56,7 @@ btn.addEventListener("click", function() {
     //chamando a funcao
     adicionarGastoNaLista(categoria, descricao, valor)
 
-    document.getElementById("valorTotal").textContent = total.toFixed(2)
+    document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style:'currency' , currency:'BRL'})
     
     
 })
