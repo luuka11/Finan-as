@@ -21,13 +21,12 @@ function adicionarGastoNaLista(categoria, descricao, valor){
 
 function atualizarTotal(valor){
     total = valor + total
+    document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style:'currency' , currency:'BRL'})
 }
 
 for (const gasto of gastos) {
     adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
 }
-    //esta adicionando o total no depvalorTotal
-    document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
 
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
@@ -55,8 +54,4 @@ btn.addEventListener("click", function() {
 
     //chamando a funcao
     adicionarGastoNaLista(categoria, descricao, valor)
-
-    document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style:'currency' , currency:'BRL'})
-    
-    
 })
