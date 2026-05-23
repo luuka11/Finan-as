@@ -28,6 +28,19 @@ for (const gasto of gastos) {
     adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
 }
 
+function calcularTotaisPorCategoria() {
+    const totaisPorCategoria = {}
+
+    for (const gasto of gastos){
+        if (totaisPorCategoria[gasto.categoria]){
+            totaisPorCategoria[gasto.categoria] += gasto.valor
+        } else {
+            totaisPorCategoria[gasto.categoria] = gasto.valor
+        }
+    }
+    return totaisPorCategoria;
+}
+
 //ocorrer evento onde o botao funcionara quando for clicado
 const btn = document.getElementById("adicionarGasto")
 btn.addEventListener("click", function() {
