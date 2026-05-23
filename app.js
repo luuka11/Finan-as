@@ -1,5 +1,6 @@
 let gastos = []; //chaves sem nada porque o usuario ainda ira adicionar
 let total = 0; //comeca em zero
+let grafico = null
 
 if (localStorage.getItem("gastos")) {
        gastos = JSON.parse(localStorage.getItem("gastos"));
@@ -22,10 +23,6 @@ function adicionarGastoNaLista(categoria, descricao, valor){
 function atualizarTotal(valor){
     total = valor + total
     document.getElementById("valorTotal").textContent = total.toLocaleString('pt-BR', {style:'currency' , currency:'BRL'})
-}
-
-for (const gasto of gastos) {
-    adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
 }
 
 function calcularTotaisPorCategoria() {
@@ -67,4 +64,30 @@ btn.addEventListener("click", function() {
 
     //chamando a funcao
     adicionarGastoNaLista(categoria, descricao, valor)
+    renderizarGrafico()
 })
+
+function renderizarGrafico() {
+    if (grafico) {
+    grafico.destroy()
+    }
+    
+    const totais = calcularTotaisPorCategoria()
+    const labels = Object.keys(totais)
+    const data = Object.values(totais)
+    const canvas = document.getElementById('grafico')
+
+    grafico = new Chart(canvas, {
+    type: 'pie',       //tipo de gráfico
+    data: {
+        labels: labels,     //array de rótulos das fatias
+        datasets: [{
+            data: data    //array de valores das fatias
+        }]
+    }
+    })
+}
+    for (const gasto of gastos) {
+    adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
+}
+renderizarGrafico()   //chamada inicial 
