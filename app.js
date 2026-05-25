@@ -47,7 +47,14 @@ btn.addEventListener("click", function() {
     }
     //variaveis em descricao, valor e categoria usando id
     const descricao = document.getElementById("descricao").value
-    const valor = parseFloat(document.getElementById("valor").value.replaceAll(".","").replace(",",".") )
+    
+    let valor = document.getElementById("valor").value
+
+    if (valor.includes(",")) {
+    valor = parseFloat(valor.replaceAll(".","").replace(",","."))
+} else {
+    valor = parseFloat(valor)
+}
 
     if (isNaN(valor)){
     window.alert("O valor que você acaba de digitar não é um número")

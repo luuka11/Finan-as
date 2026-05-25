@@ -61,3 +61,7 @@ button {
     font-size: 15px;
     border-radius: 100px;
 }
+.grafico {
+    max-width: 400px;
+    margin: 20px auto;
+}
