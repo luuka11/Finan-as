@@ -7,16 +7,28 @@ if (localStorage.getItem("gastos")) {
    }
 
 //cria uma funcao de adicionarGasto no site
-function adicionarGastoNaLista(categoria, descricao, valor){
+function adicionarGastoNaLista(categoria, descricao, valor, indice){
     //cria um item da lista
     const itemGasto = document.createElement("li") 
     
     //escreve o texto nele
     itemGasto.textContent = `${categoria} - ${descricao} = ${valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`
+
+    //cria uma varivel para guardar o botao
+    const botaoRemover = document.createElement("button")
+        botaoRemover.textContent = "X"
+
+        botaoRemover.addEventListener("click", function() {
+            gastos.splice(indice, 1)
+            localStorage.setItem("gastos", JSON.stringify(gastos))
+            renderizarTudo()
+        })
+        itemGasto.appendChild(botaoRemover)
     
     //junta o listaGastos com o filho itemGasto
     document.getElementById("listaGastos").appendChild(itemGasto)
 
+    
     atualizarTotal(valor)
 }
 
@@ -70,8 +82,7 @@ btn.addEventListener("click", function() {
     localStorage.setItem("gastos", JSON.stringify(gastos))
 
     //chamando a funcao
-    adicionarGastoNaLista(categoria, descricao, valor)
-    renderizarGrafico()
+    renderizarTudo()
 })
 
 function renderizarGrafico() {
@@ -94,7 +105,14 @@ function renderizarGrafico() {
     }
     })
 }
-    for (const gasto of gastos) {
-    adicionarGastoNaLista(gasto.categoria, gasto.descricao, gasto.valor)
-}
-renderizarGrafico()   //chamada inicial 
+
+function renderizarTudo() {
+    document.getElementById("listaGastos").innerHTML = ""
+    total = 0
+    for (let i = 0; i < gastos.length; i++){
+        adicionarGastoNaLista(gastos[i].categoria, gastos[i].descricao, gastos[i].valor, i)
+    }
+
+    renderizarGrafico()
+} 
+renderizarTudo() //chamada Inicial
