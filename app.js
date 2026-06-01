@@ -17,6 +17,7 @@ function adicionarGastoNaLista(categoria, descricao, valor, indice){
     //cria uma varivel para guardar o botao
     const botaoRemover = document.createElement("button")
         botaoRemover.textContent = "X"
+        botaoRemover.classList.add("botaoRemover")
 
         botaoRemover.addEventListener("click", function() {
             gastos.splice(indice, 1)
@@ -105,12 +106,20 @@ function renderizarGrafico() {
     }
     })
 }
+document.getElementById("filtroCategoria").addEventListener("change", function(){
+    renderizarTudo()
+})
 
 function renderizarTudo() {
     document.getElementById("listaGastos").innerHTML = ""
     total = 0
+    
+    const filtro = document.getElementById("filtroCategoria").value
+    
     for (let i = 0; i < gastos.length; i++){
+        if(filtro === "todas" || gastos[i].categoria === filtro){
         adicionarGastoNaLista(gastos[i].categoria, gastos[i].descricao, gastos[i].valor, i)
+        }
     }
 
     renderizarGrafico()

@@ -16,28 +16,40 @@
 
     <!--aqui sera o formulario de gastos e a categoria dos gastos-->
     <form>
-        <label for="descricao">Onde gastou</label>
-        <input type="text" id="descricao" placeholder="Descrição (ex: Almoço)" required>
-        
-        <label for="valor">Valor do gasto</label>
-        <input type="text" id="valor" placeholder="1.500,50" min="0" step="0.01" required>
-        
-        <label for="categoria">Categoria</label>
-        <select id="categoria">
-            <option value="Alimentação">Alimentação</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Estudos">Estudos</option>
-            <option value="Viagem">Viagem</option>
-            <option value="Outros">Outros</option>
-        </select>
+    <label for="descricao">Onde gastou</label>
+    <input type="text" id="descricao" placeholder="Descrição (ex: Almoço)" required>
+    
+    <label for="valor">Valor do gasto</label>
+    <input type="text" id="valor" placeholder="1.500,50" min="0" step="0.01" required>
+    
+    <label for="categoria">Categoria</label>
+    <select id="categoria">
+        <option value="Alimentação">Alimentação</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Viagem">Viagem</option>
+        <option value="Outros">Outros</option>
+    </select>
 
-        <!--botao para adicionar gastos-->
-        <button type="button" id ="adicionarGasto">Adicionar Gasto</button>
-    </form>
+    <button type="button" id="adicionarGasto">Adicionar Gasto</button>
+</form>
 
-    <!-- os gastos apareceram aqui quando o usuario adicionar seus gastos-->
-    <ul id="listaGastos"></ul>
+<!-- filtro FORA do form -->
+<div id="filtroContainer">
+    <label for="filtroCategoria">Filtrar por categoria</label>
+    <select id="filtroCategoria">
+        <option value="Todas">Todas</option>
+        <option value="Alimentação">Alimentação</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Viagem">Viagem</option>
+        <option value="Outros">Outros</option>
+    </select>
+</div>
+
+<ul id="listaGastos"></ul>
 
     <div>
         <canvas class="grafico" id="grafico"></canvas>
