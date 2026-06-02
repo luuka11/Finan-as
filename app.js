@@ -117,7 +117,7 @@ function renderizarTudo() {
     const filtro = document.getElementById("filtroCategoria").value
     
     for (let i = 0; i < gastos.length; i++){
-        if(filtro === "todas" || gastos[i].categoria === filtro){
+        if(filtro === "Todas" || gastos[i].categoria === filtro){
         adicionarGastoNaLista(gastos[i].categoria, gastos[i].descricao, gastos[i].valor, i)
         }
     }
