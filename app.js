@@ -7,12 +7,12 @@ if (localStorage.getItem("gastos")) {
    }
 
 //cria uma funcao de adicionarGasto no site
-function adicionarGastoNaLista(categoria, descricao, valor, indice){
+function adicionarGastoNaLista(categoria, descricao, valor, data, indice){
     //cria um item da lista
     const itemGasto = document.createElement("li") 
     
     //escreve o texto nele
-    itemGasto.textContent = `${categoria} - ${descricao} = ${valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`
+    itemGasto.textContent = `${descricao} - ${categoria} - ${data} = ${valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`
 
     //cria uma varivel para guardar o botao
     const botaoRemover = document.createElement("button")
@@ -73,11 +73,13 @@ btn.addEventListener("click", function() {
     window.alert("O valor que você acaba de digitar não é um número")
     return;
 }
-    
+    const dataInput = document.getElementById('data',).value
+    const partes = dataInput.split("-")
+    const data = `${partes[2]}/${partes[1]}/${partes[0]}`
     const categoria = document.getElementById('categoria').value
     
     //array onde tudo do gasto sera o que foi adicinado do valor e descricao
-    gastos.push({valor, descricao, categoria})
+    gastos.push({valor, descricao, categoria, data})
 
     //pega o array e salvando ele como string no localStorage
     localStorage.setItem("gastos", JSON.stringify(gastos))
@@ -118,7 +120,7 @@ function renderizarTudo() {
     
     for (let i = 0; i < gastos.length; i++){
         if(filtro === "Todas" || gastos[i].categoria === filtro){
-        adicionarGastoNaLista(gastos[i].categoria, gastos[i].descricao, gastos[i].valor, i)
+        adicionarGastoNaLista(gastos[i].categoria, gastos[i].descricao, gastos[i].valor, gastos[i].data, i)
         }
     }
 
