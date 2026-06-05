@@ -18,6 +18,13 @@ function adicionarGastoNaLista(categoria, descricao, valor, data, indice){
     const botaoRemover = document.createElement("button")
         botaoRemover.textContent = "X"
         botaoRemover.classList.add("botaoRemover")
+    const botaoEditar = document.createElement("button")
+        botaoEditar.textContent = "Editar"
+        botaoEditar.classList.add("botaoEditar")
+        botaoEditar.addEventListener("click", function() {
+        abrirModal(indice)
+})
+itemGasto.appendChild(botaoEditar)
 
         botaoRemover.addEventListener("click", function() {
             gastos.splice(indice, 1)
@@ -126,4 +133,56 @@ function renderizarTudo() {
 
     renderizarGrafico()
 } 
+
+let indiceEditando = null
+
+function abrirModal(indice) {
+    const gasto = gastos[indice]
+    indiceEditando = indice
+
+    // preenche os campos do modal com os dados atuais
+    const partesData = gasto.data.split("/")
+    document.getElementById("editData").value = `${partesData[2]}-${partesData[1]}-${partesData[0]}`
+    document.getElementById("editDescricao").value = gasto.descricao
+    document.getElementById("editValor").value = gasto.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+    document.getElementById("editCategoria").value = gasto.categoria
+
+    document.getElementById("modalEditar").style.display = "block"
+}
+
+document.getElementById("confirmar").addEventListener("click", function() {
+    let valorEditado = document.getElementById("editValor").value
+
+    if (valorEditado.includes(",")) {
+        valorEditado = parseFloat(valorEditado.replaceAll(".", "").replace(",", "."))
+    } else {
+        valorEditado = parseFloat(valorEditado)
+    }
+
+    if (isNaN(valorEditado)) {
+        alert("Valor inválido!")
+        return
+    }
+
+    const dataInput = document.getElementById("editData").value
+    const partes = dataInput.split("-")
+    const data = `${partes[2]}/${partes[1]}/${partes[0]}`
+
+    gastos[indiceEditando] = {
+        descricao: document.getElementById("editDescricao").value,
+        valor: valorEditado,
+        categoria: document.getElementById("editCategoria").value,
+        data: data
+    }
+
+    localStorage.setItem("gastos", JSON.stringify(gastos))
+    document.getElementById("modalEditar").style.display = "none"
+    indiceEditando = null
+    renderizarTudo()
+})
+
+document.getElementById("cancelar").addEventListener("click", function() {
+    document.getElementById("modalEditar").style.display = "none"
+    indiceEditando = null
+})
 renderizarTudo() //chamada Inicial
